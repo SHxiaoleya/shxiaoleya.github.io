@@ -597,7 +597,7 @@
         document.querySelector('button').addEventListener('click', function() {
             const emailInput = document.querySelector('input[type="email"]');
             if(emailInput.value && emailInput.value.includes('@')) {
-                alert('感谢订阅！由于该功能未完善，您暂时不会收到邮件。');
+                alert('感谢订阅！但由于该功能未完善，您将不会收到任何邮件。');
                 emailInput.value = '';
             } else {
                 alert('请输入有效的电子邮件地址');
