@@ -577,7 +577,7 @@
     <!-- 文章头部 -->
     <header class="article-header">
         <div class="container">
-            <h1 class="article-title">河南未满18岁ICP备案指北</h1>
+            <h1 class="article-title">SCP:SL Linux开服教程</h1>
             
             <div class="article-meta">
                 <div class="meta-item">
@@ -586,7 +586,7 @@
                 </div>
                 <div class="meta-item">
                     <i class="fas fa-calendar-alt"></i>
-                    <span>发布日期：2025年8月20日</span>
+                    <span>发布日期：2025年8月21日</span>
                 </div>
             </div>
         </div>
@@ -596,55 +596,149 @@
     <main class="article-content">
         <div class="container">
             <!-- 引言 -->
-            <blockquote>
-                <p>hhh是指北哦，仅供河南娃参考~</p>
-            </blockquote>
-            
-            <p>备案第一点：要有一台比较长期的云服务器，和一个<strong>有意义</strong>的域名。(有意义：不知道为什么，总之你的域名有一定的逻辑)</p>
-            
-            <p>准备完服务器和域名后，向你的服务商提交申请即可！</p>
-            
-<p>河南娃们准备好<strong>河南个人网站备案承诺书</strong>，这个东西你可以找你的服务商发工单要模板，或者在我这里下载<a href="https://beianwendang.s3.cn-north-1.jdcloud-oss.com/wendangxiazhai/henan/hn-grcns.docx" target="_blank"  rel="nofollow" >京东云给的模板</a>)，随后详细填写内容，再<strong>打印</strong>下来之后签字！(上传到辅助材料处)</p>
+            <p>知周所众，Win开服有一些弊端，比如<strong>占用高</strong>，<strong>断开连接后不好好工作</strong>之类的。那么，我们就要请出我们的<strong>Linux</strong>啦！</p>
 
 
 
-<p><strong>未满18岁已满16岁看这里</strong>：要把你的监护人身份证正反两面拍照拼接，上传到辅助材料处！<em>如果可以的话上传一下出生证明或户口本</em>。</p>
+<p><em>查阅网上资料发现用Linux开服的教程少之又少，所以在自己尝试一通之后来写个教程。</em></p>
 
 
 
-<p>备案的网站名称<strong>千万不要</strong>填写<em>博客，论坛</em>之类的东西！可以填写一些<strong>个人笔记</strong>之类会更容易过！开办内容要和网站名称有一定的关联性，<strong>千万不要</strong>填写经营类内容！</p>
+<p><em>本教程需要对Linux有一定理解，如果遇到不懂的问题，请自行百度！注意：<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">开服务器很烧钱！！！</mark></em></p>
 
 
 
-<p>其他内容自行填写即可，最后提交给你的服务商进行初审(注意域名不能有任何解析！)</p>
+<p><strong>8月30日更新</strong>：有<a href="https://github.com/kldhsh123/SCP-SL-AutoDeploy" target="_blank"  rel="nofollow" >一键部署脚本</a>了！请确保你的Linux是<strong>完全体</strong>，而不是拉取镜像的<strong>面板服</strong>！否则请继续看教程！</p>
 
 
 
-<p>初审完毕后，你将会收到一个验证码，然后按照提示是验证完成后就等待工信部审核吧！</p>
+<h2 class="wp-block-heading">准备：</h2>
 
 
 
-<p>审核期限为20个<strong>工作日</strong>内，超过这个期限你可能要发工单问问了，我备案花了18个<strong>工作日</strong>。</p>
+<p>一个<strong>Linux服务器</strong>(需要<strong>不封海外和UDP</strong>，尽量带一个<strong>公网ip</strong>，线路能上<strong>BGP</strong>就上不然会很卡)</p>
 
 
 
-<p>在审核的最后几天，你的服务商可能会到打电话问你一些问题，根据你网站的名称之类的回答即可。<s>不要耍小聪明</s>不要太死板就行。</p>
+<p>以下为推荐配置：</p>
 
 
 
-<p>初审通过后到工信部审核完毕，中间的这个空窗期你可以提前制作一下你的网站页面，尤其是提前制作一下1级域名链接的<strong>单页面</strong>。可以让AI制作，预留一个备案号栏位即可！备案通过后要在<strong>24小时</strong>内悬挂备案号，提前制作这个单页面可以帮助你快速部署！<em>(你也不想备案通过后只有一个备案号孤零零的悬挂在你的网站吧)</em></p>
+<figure class="wp-block-table"><table class="has-fixed-layout"><tbody><tr><td>配置</td><td>推荐人数</td><td>使用场景</td></tr><tr><td>2H4G</td><td>10人以下</td><td>朋友之间娱乐</td></tr><tr><td>4H8G</td><td>25人左右</td><td>小型纯净/轻插服</td></tr><tr><td>6H10G</td><td>40人以上</td><td>大型插件/重插服</td></tr></tbody></table></figure>
 
 
 
-<p>随后你就可以搞你想要的东西了！记得把备案号悬挂在底部就行！</p>
+<p><em>(这里的CPU推荐跑分350分以上)</em></p>
 
 
 
-<p><strong>注意</strong>：备案通过后要部署WP之类的话，要关闭评论功能哦~</p>
+<p><strong>服务商推荐</strong>：<a href="https://www.rainyun.com/xiaoleya_" target="_blank"  rel="nofollow" >雨云</a>(宿迁和重庆NAT无法上列表)，<a href="https://simpfun.cn/auth?type=register&amp;code=292211072" target="_blank"  rel="nofollow" >简幻欢</a>(公益面板服无法上列表)，<a href="https://cloud.beecld.com/aff/SNAPHPXD" target="_blank"  rel="nofollow" >蜜蜂云</a></p>
 
 
 
-<p>以上是我自己备案总结出来的一些奇奇怪怪的知识，希望可以帮助到你！</p>
+<h2 class="wp-block-heading">安装SteamCMD</h2>
+
+
+
+<p>先去<a href="https://developer.valvesoftware.com/wiki/SteamCMD" target="_blank"  rel="nofollow" >SteamCMD</a>官网找对应系统按说明自行下载！</p>
+
+
+
+<p>随后解压下载下来的文件，打开里面的程序等他下载其他文件。</p>
+
+
+
+<pre class="wp-block-code"><code>// 打开
+./steamcmd.sh
+// 关闭
+quit</code></pre>
+
+
+
+<p>下载完毕之后建议重启该程序。</p>
+
+
+
+<h2 class="wp-block-heading">安装SL服务端</h2>
+
+
+
+<p>打开已经下载好SteamCMD，登录匿名账户：</p>
+
+
+
+<pre class="wp-block-code"><code>login anonymous</code></pre>
+
+
+
+<p>然后下载服务端：</p>
+
+
+
+<pre class="wp-block-code"><code>app_update 996560 validate</code></pre>
+
+
+
+<p>下载完毕后关闭SteamCMD，随后把文件夹~/Steam/steamapps/common/SCP Secret Laboratory 复制出来。</p>
+
+
+
+<p>打开SCP Secret Laboratory/LocalAdmin</p>
+
+
+
+<h2 class="wp-block-heading">配置服务端</h2>
+
+
+
+<p>首次打开LocalAdmin后，输入 <strong>yes</strong> 接受EULA，然后输入游戏端口(服务器的公网IP是自己的就推荐输入<strong>7777</strong>。如果是NAT转发则需要确保<strong>内部端口与外部端口一致</strong>，否则无法上列表！) ，随后输入 <strong>keep</strong> 使用默认配置，再输入 <strong>this</strong> 即可。</p>
+
+
+
+<p>等到出现 <strong>Waiting the player</strong> 后，即可输入 <strong>stop</strong> 关闭服务器，然后去改配置文件。</p>
+
+
+
+<p>配置文件路径：~/.config/SCP Secret Laboratory/config</p>
+
+
+
+<p><em>改配置的方法和Win一样，包括装载插件之类也和Win一样，去搜其他教程吧，反正都大差不差</em></p>
+
+
+
+<h2 class="wp-block-heading">上列表</h2>
+
+
+
+<p>恭喜你完成了前面一大堆乱七八糟的步骤，现在你可以上列表了！</p>
+
+
+
+<p>在上列表之前，请确保你的服务器：<strong>可以正常连接，不封海外，填写了服务器名称与介绍，服务器是单IP而不是域名</strong></p>
+
+
+
+<p>确认以上内容后请在你的服务端输入：</p>
+
+
+
+<pre class="wp-block-code"><code>//静态ip(不知道自己服务器是啥就输这个)
+!verify static
+//动态ip(请确保你知道再输)
+!verify dynamic</code></pre>
+
+
+
+<p>静等几分钟，跳出链接后打开走完验证流程，随后重启服务器即可。</p>
+
+
+
+<p>如果出现红色报错，你可能需要给官方人员写邮件了：发送邮件至 <strong>scpsl@northwood-studios.com</strong>，邮件中需要包含服务器IP和端口。目前验证还算快，正常今天发邮件明天早上就收到回复了。</p>
+
+
+
+<p>好了，做完以上流程，你的服务器已经差不多开好了。如果中间遇到了其他的错误，可以<strong>百度</strong>或<strong>联系我</strong>：<em>xiaoleya@foxmail.com</em></p>
     <!-- 回到顶部按钮 -->
     <div class="back-to-top" id="backToTop">
         <i class="fas fa-chevron-up"></i>
