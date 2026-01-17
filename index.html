@@ -418,9 +418,9 @@
             </div>
             
             <ul class="nav-links" id="navLinks">
-                <li><a href="http://树.top">首页</a></li>
-                <li><a href="https://www.07hut.top">博客</a></li>
-                <li><a href="mailto:xiaoleya@foxmail.com">联系</a></li>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="/txtwin/">文章</a></li>
+                <li><a href="index.html#contact">联系</a></li>
             </ul>
         </div>
     </nav>
@@ -521,7 +521,6 @@
                         <a href="https://github.com/SHxiaoleya" style="margin: 0 0.5rem; font-size: 1.5rem;"><i class="fab fa-github"></i></a>
                         <a href="https://space.bilibili.com/106493680" style="margin: 0 0.5rem; font-size: 1.5rem;"><i class="fab fa-bilibili"></i></a>
                     </div>
-                    <p style="font-size: 0.9rem; margin-top: 1rem;">链接已更新</p>
                 </div>
                 
                 <div class="contact-item">
@@ -548,9 +547,9 @@
             <p style="max-width: 600px; margin: 0 auto 1.5rem; opacity: 0.9;">在数字世界的土壤中扎根，在知识的阳光下生长，在分享的雨露中繁茂。</p>
             
             <ul class="footer-links">
-                <li><a href="http://树.top">首页</a></li>
-                <li><a href="https://www.07hut.top">博客</a></li>
-                <li><a href="mailto:xiaoleya@foxmail.com">联系</a></li>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="/txtwin/">文章</a></li>
+                <li><a href="index.html#contact">联系</a></li>
             </ul>
             
             <div class="copyright">
@@ -597,7 +596,7 @@
         document.querySelector('button').addEventListener('click', function() {
             const emailInput = document.querySelector('input[type="email"]');
             if(emailInput.value && emailInput.value.includes('@')) {
-                alert('感谢订阅！但由于该功能未完善，您将不会收到任何邮件。');
+                alert('感谢订阅！由于该功能未完善，您暂时不会收到邮件。');
                 emailInput.value = '';
             } else {
                 alert('请输入有效的电子邮件地址');
