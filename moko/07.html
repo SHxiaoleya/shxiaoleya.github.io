@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>零柒遐想-最后的公告</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #f0f0f0;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(25, 40, 50, 0.85);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            margin: 30px auto;
+            border: 1px solid rgba(100, 150, 200, 0.2);
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #2c9cf2, #2cf2e9, #9c2cf2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #2c9cf2, transparent);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(44, 156, 242, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0d2ff;
+            font-weight: 300;
+        }
+        
+        .content {
+            font-size: 1.15rem;
+            margin-bottom: 40px;
+        }
+        
+        .content p {
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+        
+        .salutation {
+            font-weight: 600;
+            color: #a0d2ff;
+            font-size: 1.2rem;
+        }
+        
+        .business-section {
+            margin: 40px 0;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #2cf2e9;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.3rem;
+        }
+        
+        .business-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .business-item {
+            background: rgba(30, 60, 80, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .business-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .transfer {
+            border-left-color: #2c9cf2;
+        }
+        
+        .archive {
+            border-left-color: #2cf2e9;
+        }
+        
+        .destroy {
+            border-left-color: #9c2cf2;
+        }
+        
+        .business-title {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .business-desc {
+            color: #d0e5ff;
+            margin-bottom: 8px;
+        }
+        
+        .business-destination {
+            font-style: italic;
+            color: #a0d2ff;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(100, 150, 200, 0.2);
+        }
+        
+        .thanks {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .years {
+            font-size: 1.8rem;
+            color: #2cf2e9;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin: 25px 0;
+            text-shadow: 0 2px 8px rgba(44, 242, 233, 0.4);
+        }
+        
+        .logo {
+            font-size: 1.2rem;
+            color: #a0d2ff;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+        
+        .decoration {
+            position: absolute;
+            opacity: 0.03;
+            font-size: 15rem;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .decoration-1 {
+            top: 10%;
+            right: 5%;
+            transform: rotate(15deg);
+        }
+        
+        .decoration-2 {
+            bottom: 10%;
+            left: 5%;
+            transform: rotate(-15deg);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 20px;
+                margin: 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                font-size: 1.05rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .business-title {
+                font-size: 1.2rem;
+            }
+            
+            .decoration {
+                font-size: 8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .years {
+                font-size: 1.5rem;
+            }
+            
+            .decoration {
+                display: none;
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 装饰元素 -->
+        <div class="decoration decoration-1">零柒遐想</div>
+        <div class="decoration decoration-2">07遐想</div>
+        
+        <div class="header fade-in">
+            <h1>零柒遐想 - 最后的公告</h1>
+            <div class="subtitle">最后的告别，永恒的记忆</div>
+        </div>
+        
+        <div class="content">
+            <p class="salutation fade-in delay-1">尊敬的用户，您好！</p>
+            
+            <p class="fade-in delay-2">由于零柒遐想主干业务变更及相关备案即将到期，我们将不得不作出决定——停止零柒遐想。</p>
+            
+            <p class="fade-in delay-3">零柒遐想停止后，名下业务将会作出以下处理：</p>
+        </div>
+        
+        <div class="business-section">
+            <div class="section-title fade-in delay-3">
+                <i class="fas fa-exchange-alt"></i> 业务处理方案
+            </div>
+            
+            <div class="business-list">
+                <div class="business-item transfer fade-in delay-4">
+                    <div class="business-title">
+                        <i class="fas fa-share-square"></i> 转移
+                    </div>
+                    <div class="business-desc">零柒遐想博客，游戏云，云服务器，云盘等业务将会转移至 繁花悔落（系 树.top 名下实验项目）</div>
+                    
+                </div>
+                
+                <div class="business-item archive fade-in delay-4">
+                    <div class="business-title">
+                        <i class="fas fa-archive"></i> 归档
+                    </div>
+                    <div class="business-desc">零柒遐想源码，文章，服务器数据等业务将会归档至 树.top 存储云盘</div>
+                </div>
+                
+                <div class="business-item destroy fade-in delay-4">
+                    <div class="business-title">
+                        <i class="fas fa-trash-alt"></i> 销毁
+                    </div>
+                    <div class="business-desc">零柒遐想用户隐私数据，wiki，备案信息等业务将会永久销毁</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer fade-in delay-5">
+            <div class="thanks">
+                感谢您对零柒遐想三年以来的支持与陪伴，<br>
+                江湖路远，有缘再见！
+            </div>
+            
+            <div class="years">
+                2023 - 2026 零柒遐想
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 添加简单的交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const businessItems = document.querySelectorAll('.business-item');
+            
+            businessItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+            
+            // 为标题添加闪烁效果
+            const title = document.querySelector('h1');
+            setInterval(() => {
+                title.style.textShadow = `0 2px 10px rgba(44, ${156 + Math.random() * 50}, ${242 + Math.random() * 20}, 0.5)`;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
