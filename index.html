@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>树.top - 数字世界的成长之树</title>
+    <title>网站施工中 | 树.top - 树小乐的个人空间</title>
+    <meta name="description" content="树小乐的个人网站正在施工中，很快将以全新面貌与大家见面。">
+    <meta name="keywords" content="网站施工中,维护中,树小乐,树.top">
+    <meta name="author" content="树小乐">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
     <style>
@@ -28,37 +31,36 @@
             line-height: 1.6;
             color: var(--dark-text);
             background-color: var(--light-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow-x: hidden;
         }
         
         h1, h2, h3 {
             font-weight: 700;
-            margin-bottom: 1rem;
             line-height: 1.3;
+            margin-bottom: 1rem;
         }
         
         h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
-            position: relative;
+            color: var(--primary-green);
         }
         
         h2 {
-            font-size: 2rem;
-            color: var(--primary-green);
-            border-left: 4px solid var(--accent-gold);
-            padding-left: 1rem;
-            margin-top: 2.5rem;
-        }
-        
-        h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--primary-green);
         }
         
         p {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             color: var(--light-text);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         a {
@@ -75,227 +77,280 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
-        }
-        
-        /* 导航栏 */
-        .navbar {
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: 1.8rem;
-            color: var(--primary-green);
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            margin-right: 0.5rem;
-            color: var(--accent-gold);
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 2rem;
-        }
-        
-        .nav-links a {
-            font-weight: 500;
-            position: relative;
-        }
-        
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--accent-gold);
-            left: 0;
-            bottom: -5px;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover:after {
             width: 100%;
         }
         
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary-green);
-        }
-        
-        /* 英雄区域 */
-        .hero {
-            background: linear-gradient(135deg, rgba(45, 90, 39, 0.05) 0%, rgba(141, 181, 150, 0.1) 100%);
-            min-height: 100vh;
+        /* 施工页面主要内容 */
+        .construction-content {
+            flex: 1;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            padding-top: 80px;
+            justify-content: center;
+            text-align: center;
+            padding: 3rem 1rem;
             position: relative;
             overflow: hidden;
         }
         
-        .hero:before {
-            content: '';
+        /* 背景装饰元素 */
+        .construction-bg {
             position: absolute;
-            width: 300px;
-            height: 300px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,5 C30,5 15,25 15,50 C15,75 30,95 50,95 C70,95 85,75 85,50 C85,25 70,5 50,5 Z" fill="none" stroke="%232d5a27" stroke-width="0.5" opacity="0.1"/></svg>');
-            bottom: -50px;
-            right: -50px;
-            opacity: 0.3;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,5 C30,5 15,25 15,50 C15,75 30,95 50,95 C70,95 85,75 85,50 C85,25 70,5 50,5 Z" fill="none" stroke="%232d5a27" stroke-width="0.5"/></svg>');
+            background-size: 300px;
         }
         
-        .hero-content {
-            flex: 1;
-            padding-right: 3rem;
-            position: relative;
-            z-index: 1;
+        .logo {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 3rem;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
         }
         
-        .hero-image {
-            flex: 1;
-            text-align: center;
-            position: relative;
-        }
-        
-        .tree-illustration {
-            max-width: 100%;
-            height: auto;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero h1 span {
+        .logo i {
+            margin-right: 0.8rem;
             color: var(--accent-gold);
         }
         
-        .tagline {
-            font-size: 1.3rem;
+        .construction-icon {
+            font-size: 6rem;
+            color: var(--accent-gold);
             margin-bottom: 2rem;
-            color: var(--primary-green);
-            font-weight: 500;
+            animation: bounce 2s infinite;
         }
         
-        .cta-button {
-            display: inline-block;
-            background-color: var(--primary-green);
-            color: white;
-            padding: 0.8rem 2rem;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .progress-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem auto 3rem;
+            background-color: rgba(45, 90, 39, 0.1);
             border-radius: 50px;
-            font-weight: 500;
-            margin-top: 1.5rem;
-            border: 2px solid var(--primary-green);
-            transition: all 0.3s ease;
+            height: 20px;
+            overflow: hidden;
         }
         
-        .cta-button:hover {
-            background-color: transparent;
-            color: var(--primary-green);
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-green);
+            border-radius: 50px;
+            width: 65%;
+            transition: width 1s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        /* 关于区域 */
-        .about {
-            padding: 5rem 0;
-            background-color: white;
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
         }
         
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
         
-        .about-text {
-            flex: 1;
+        .progress-text {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-top: 0.5rem;
         }
         
-        .about-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .avatar {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 8px solid var(--light-green);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* 联系区域 */
-        .contact {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, rgba(45, 90, 39, 0.03) 0%, rgba(141, 181, 150, 0.08) 100%);
-        }
-        
-        .contact-methods {
+        /* 按钮样式 */
+        .button-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1.5rem;
+            justify-content: center;
             margin-top: 2rem;
         }
         
-        .contact-item {
-            flex: 1;
-            min-width: 250px;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
             text-align: center;
-            transition: transform 0.3s ease;
+            min-width: 200px;
+            border: 2px solid transparent;
         }
         
-        .contact-item:hover {
-            transform: translateY(-10px);
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
         }
         
-        .contact-icon {
-            font-size: 2.5rem;
+        .btn-primary:hover {
+            background-color: transparent;
             color: var(--primary-green);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-green);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn i {
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        /* 倒计时 */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            padding: 1.5rem 1rem;
+            border-radius: 10px;
+            min-width: 100px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            line-height: 1;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-top: 0.5rem;
+        }
+        
+        /* 更新日志 */
+        .updates {
+            margin-top: 3rem;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .updates-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-green);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .updates-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent-gold);
+            bottom: -5px;
+            left: 0;
+        }
+        
+        .update-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
             margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            border-left: 4px solid var(--accent-gold);
+        }
+        
+        .update-date {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .update-date i {
+            margin-right: 0.5rem;
+        }
+        
+        .update-text {
+            font-size: 1rem;
+        }
+        
+        /* 联系信息 */
+        .contact-info {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .contact-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-green);
+        }
+        
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background-color: white;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-email i {
+            margin-right: 0.8rem;
+            color: var(--accent-gold);
         }
         
         /* 页脚 */
         footer {
             background-color: var(--primary-green);
             color: white;
-            padding: 3rem 0;
+            padding: 2rem 0;
             text-align: center;
-        }
-        
-        .footer-logo {
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: white;
+            width: 100%;
         }
         
         .footer-links {
@@ -303,6 +358,7 @@
             justify-content: center;
             list-style: none;
             margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
         
         .footer-links li {
@@ -321,71 +377,52 @@
         .copyright {
             opacity: 0.7;
             font-size: 0.9rem;
-            margin-top: 2rem;
+            margin-top: 1rem;
         }
         
         /* 响应式设计 */
-        @media (max-width: 992px) {
-            .hero-content, .hero-image {
-                flex: 100%;
-                padding-right: 0;
-            }
-            
-            .hero-image {
-                margin-top: 3rem;
-            }
-            
-            .about-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero h1 {
-                font-size: 3rem;
-            }
-        }
-        
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                flex-direction: column;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-                padding: 1rem 0;
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links li {
-                margin: 0;
-                text-align: center;
-                padding: 1rem 0;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
+            .container {
+                padding: 0 1.5rem;
             }
             
             h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             h2 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+            }
+            
+            .construction-icon {
+                font-size: 5rem;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .countdown {
+                gap: 1rem;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+                padding: 1rem 0.5rem;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                min-width: 180px;
+                padding: 0.9rem 2rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                align-items: center;
             }
         }
         
@@ -394,162 +431,117 @@
                 padding: 0 1rem;
             }
             
-            .hero h1 {
+            h1 {
                 font-size: 2rem;
             }
             
-            .tagline {
-                font-size: 1.1rem;
+            .construction-icon {
+                font-size: 4rem;
             }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .countdown-item {
+                min-width: 70px;
+            }
+            
+            .countdown-value {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                min-width: 160px;
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+        
+        /* 漂浮装饰元素 */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(141, 181, 150, 0.2);
+            z-index: -1;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 5%;
+            animation: float 20s infinite linear;
+        }
+        
+        .floating-element:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            bottom: 15%;
+            right: 8%;
+            animation: float 25s infinite linear reverse;
+        }
+        
+        .floating-element:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 50%;
+            right: 15%;
+            animation: float 18s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">
+    <!-- 漂浮装饰元素 -->
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    
+    <!-- 施工页面主要内容 -->
+    <main class="construction-content">
+        <div class="construction-bg"></div>
+        
+        <div class="container">
+            <!-- 网站Logo -->
+            <div class="logo">
                 <i class="fas fa-tree"></i>
                 树.top
-            </a>
-            
-            <div class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
             </div>
             
-            <ul class="nav-links" id="navLinks">
-                <li><a href="/index.html">首页</a></li>
-                <li><a href="/txtwin/">文章</a></li>
-                <li><a href="/index.html#contact">联系</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- 英雄区域 -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div style="display: flex; flex-wrap: wrap; align-items: center;">
-                <div class="hero-content">
-                    <h1>我是<span>树小乐</span></h1>
-                    <p class="tagline">在数字世界扎根生长，分享知识与灵感</p>
-                    <p>欢迎来到我的个人空间！这里是我的数字根系，记录我的成长轨迹、思考与创作。正如树木需要阳光、土壤和水分，我的成长也离不开学习、实践和分享。</p>
-                    <p>拥有域名 <strong>树.top</strong> 对我来说不仅仅是一个网址，更是个人理念的延伸。在这里，我将持续分享我在专业领域的探索、生活感悟以及一切值得记录的美好事物。</p>
-                    <a href="#about" class="cta-button">了解更多</a>
-                </div>
-                
-                <div class="hero-image">
-                    <!-- SVG树形插图 -->
-                    <svg class="tree-illustration" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-                        <!-- 树干 -->
-                        <rect x="185" y="300" width="30" height="150" fill="#8B4513"/>
-                        
-                        <!-- 树冠 -->
-                        <ellipse cx="200" cy="250" rx="80" ry="100" fill="#2d5a27" opacity="0.9"/>
-                        <ellipse cx="220" cy="180" rx="60" ry="70" fill="#2d5a27" opacity="0.8"/>
-                        <ellipse cx="170" cy="200" rx="50" ry="60" fill="#2d5a27" opacity="0.8"/>
-                        <ellipse cx="250" cy="230" rx="40" ry="50" fill="#2d5a27" opacity="0.7"/>
-                        <ellipse cx="150" cy="150" rx="40" ry="50" fill="#2d5a27" opacity="0.7"/>
-                        
-                        <!-- 装饰点 -->
-                        <circle cx="230" cy="140" r="8" fill="#d4af37"/>
-                        <circle cx="180" cy="120" r="6" fill="#d4af37"/>
-                        <circle cx="260" cy="200" r="7" fill="#d4af37"/>
-                        <circle cx="130" cy="180" r="9" fill="#d4af37"/>
-                        <circle cx="200" cy="100" r="5" fill="#d4af37"/>
-                        
-                        <!-- 地面 -->
-                        <rect x="0" y="450" width="400" height="50" fill="#8db596" opacity="0.5"/>
-                    </svg>
-                </div>
+            <!-- 施工图标 -->
+            <div class="construction-icon">
+                <i class="fas fa-tools"></i>
             </div>
-        </div>
-    </section>
-
-    <!-- 关于区域 -->
-    <section class="about" id="about">
-        <div class="container">
-            <h2>关于树小乐</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>你好！我是树小乐，一个在数字世界中不断探索和成长的人。正如我的名字和域名所表达的，我相信每个人都可以像一棵树一样，向下扎根汲取养分，向上生长追寻阳光。</p>
-                    <p>我的兴趣广泛，涵盖技术，写作，绘画等。我喜欢将复杂的概念分解成易于理解的部分，并与他人分享。</p>
-                    <p>这个网站将是我分享想法、记录学习和展示项目的空间。我希望它不仅能展示我的成长，也能为他人提供价值——就像树荫能为路人提供休憩一样。</p>
-                    <p>目前这个网站还处于初期阶段，就像一棵刚刚种下的树苗。但随着时间的推移，它会逐渐枝繁叶茂，内容也会越来越丰富。我计划在这里分享：</p>
-                    <ul style="margin-left: 2rem; margin-bottom: 1.5rem; color: var(--light-text);">
-                        <li>专业领域的深度文章和教程</li>
-                        <li>项目经验和案例分享</li>
-                        <li>读书笔记和学习心得</li>
-                        <li>生活思考和灵感记录</li>
-                    </ul>
-                    <p>感谢你来到这里，期待我们都能在这片数字森林中找到属于自己的成长路径。</p>
-                </div>
-                <div class="about-image">
-                    <!-- 占位头像，实际使用时可替换 -->
-                    <div class="avatar" style="background: linear-gradient(135deg, #2d5a27, #8db596); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    <p style="margin-top: 1.5rem; font-style: italic; color: var(--primary-green);">数字园丁</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 联系区域 -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2>保持联系</h2>
-            <p>如果你对我的内容感兴趣，想交流想法，或者有合作机会，欢迎通过以下方式联系我。我期待与志同道合的朋友建立连接！</p>
             
-            <div class="contact-methods">
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3>电子邮件</h3>
-                    <p>欢迎发送邮件到：<br><a href="mailto:xiaoleya@foxmail.com">xiaoleya@foxmail.com</a></p>
-                    <p style="font-size: 0.9rem; margin-top: 1rem;">我会在7天内回复</p>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-rss"></i>
-                    </div>
-                    <h3>社交媒体</h3>
-                    <p>你可以在这些平台找到我：</p>
-                    <div style="margin-top: 1rem;">
-                        <a href="https://qm.qq.com/q/GFwy0tfHiA" style="margin: 0 0.5rem; font-size: 1.5rem;"><i class="fab fa-qq"></i></a>
-                        <a href="https://github.com/SHxiaoleya" style="margin: 0 0.5rem; font-size: 1.5rem;"><i class="fab fa-github"></i></a>
-                        <a href="https://space.bilibili.com/106493680" style="margin: 0 0.5rem; font-size: 1.5rem;"><i class="fab fa-bilibili"></i></a>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3>奇怪的地方</h3>
-                    <p>找到密码，开启奇怪！</p>
-                    <div style="margin-top: 1rem;">
-                        <input type="password" placeholder="请输入密码" style="padding: 0.8rem; width: 100%; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 1rem;">
-                        <button style="background-color: var(--primary-green); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 5px; cursor: pointer; width: 100%;">进入！</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            <!-- 标题 -->
+            <h1>网站正在施工中</h1>
+            
+            <!-- 描述 -->
+            <p>
+                您好！网站目前正在进行升级改造。
+            </p>
+            <p>
+                在此期间，您可以通过下方的按钮查看公告。全新网站预计很快与大家见面！
+            </p>
+            
+            <!-- 按钮组 -->
+            <div class="button-group">
+                <a href="/moko/07.html" target="_blank" class="btn btn-primary" id="externalLink">
+                    <i class="fas fa-external-link-alt"></i>
+                    访问零柒遐想公告
+                </a>
 
     <!-- 页脚 -->
     <footer>
         <div class="container">
-            <div class="footer-logo">
-                <i class="fas fa-tree"></i> 树.top
-            </div>
-            <p style="max-width: 600px; margin: 0 auto 1.5rem; opacity: 0.9;">在数字世界的土壤中扎根，在知识的阳光下生长，在分享的雨露中繁茂。</p>
-            
             <ul class="footer-links">
-                <li><a href="/index.html">首页</a></li>
-                <li><a href="/txtwin/">文章</a></li>
-                <li><a href="/index.html#contact">联系</a></li>
+                <li><a href="index.html">首页</a></li>
             </ul>
             
             <div class="copyright">
@@ -559,50 +551,39 @@
     </footer>
 
     <script>
-        // 移动端菜单切换
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('active');
-        });
-        
-        // 点击菜单项后关闭移动端菜单
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.getElementById('navLinks').classList.remove('active');
-            });
-        });
-        
         // 设置当前年份
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+        // 外部链接按钮
+        document.getElementById('externalLink').addEventListener('click', function(e) {
+            // 可以在这里添加点击跟踪
+            console.log('用户点击了外部链接按钮');
+            
+            // 实际跳转由href属性完成
+            // 如果需要确认跳转，可以添加以下代码：
+            // const confirmLeave = confirm('即将跳转，是否继续？');
+            // if (!confirmLeave) {
+            //     e.preventDefault();
+            // }
         });
         
-        // 简单的表单提交处理
-        // 你找密码找到这儿来了？
-        document.querySelector('button').addEventListener('click', function() {
-            const emailInput = document.querySelector('input[type="password"]');
-            if(emailInput.value && emailInput.value.includes('tree')) {
-                alert('密码正确！现在试试在网址后面加上“/moko”!');
-                emailInput.value = '';
-            } else {
-                alert('密码错误喔！');
-            }
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            // 页面元素渐入效果
+            const elements = document.querySelectorAll('.logo, .construction-icon, h1, p, .progress-container, .countdown, .button-group, .updates, .contact-info');
+            
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
         });
+
     </script>
 </body>
 </html>

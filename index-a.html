@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>树.top - 数字世界的成长之树</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-green: #2d5a27;
+            --light-green: #8db596;
+            --accent-gold: #d4af37;
+            --light-bg: #f9f7f2;
+            --dark-text: #333333;
+            --light-text: #666666;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-green);
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 1rem;
+            margin-top: 2.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--light-text);
+        }
+        
+        a {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-gold);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.8rem;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--accent-gold);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-green);
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            background: linear-gradient(135deg, rgba(45, 90, 39, 0.05) 0%, rgba(141, 181, 150, 0.1) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,5 C30,5 15,25 15,50 C15,75 30,95 50,95 C70,95 85,75 85,50 C85,25 70,5 50,5 Z" fill="none" stroke="%232d5a27" stroke-width="0.5" opacity="0.1"/></svg>');
+            bottom: -50px;
+            right: -50px;
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            flex: 1;
+            padding-right: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        
+        .tree-illustration {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero h1 span {
+            color: var(--accent-gold);
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            margin-top: 1.5rem;
+            border: 2px solid var(--primary-green);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--primary-green);
+        }
+        
+        /* 关于区域 */
+        .about {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .avatar {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid var(--light-green);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 联系区域 */
+        .contact {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, rgba(45, 90, 39, 0.03) 0%, rgba(141, 181, 150, 0.08) 100%);
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero-content, .hero-image {
+                flex: 100%;
+                padding-right: 0;
+            }
+            
+            .hero-image {
+                margin-top: 3rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+                padding: 1rem 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-tree"></i>
+                树.top
+            </a>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/index.html">首页</a></li>
+                <li><a href="/txtwin/">文章</a></li>
+                <li><a href="/index.html#contact">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div style="display: flex; flex-wrap: wrap; align-items: center;">
+                <div class="hero-content">
+                    <h1>我是<span>树小乐</span></h1>
+                    <p class="tagline">在数字世界扎根生长，分享知识与灵感</p>
+                    <p>欢迎来到我的个人空间！这里是我的数字根系，记录我的成长轨迹、思考与创作。正如树木需要阳光、土壤和水分，我的成长也离不开学习、实践和分享。</p>
+                    <p>拥有域名 <strong>树.top</strong> 对我来说不仅仅是一个网址，更是个人理念的延伸。在这里，我将持续分享我在专业领域的探索、生活感悟以及一切值得记录的美好事物。</p>
+                    <a href="#about" class="cta-button">了解更多</a>
+                </div>
+                
+                <div class="hero-image">
+                    <!-- SVG树形插图 -->
+                    <svg class="tree-illustration" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 树干 -->
+                        <rect x="185" y="300" width="30" height="150" fill="#8B4513"/>
+                        
+                        <!-- 树冠 -->
+                        <ellipse cx="200" cy="250" rx="80" ry="100" fill="#2d5a27" opacity="0.9"/>
+                        <ellipse cx="220" cy="180" rx="60" ry="70" fill="#2d5a27" opacity="0.8"/>
+                        <ellipse cx="170" cy="200" rx="50" ry="60" fill="#2d5a27" opacity="0.8"/>
+                        <ellipse cx="250" cy="230" rx="40" ry="50" fill="#2d5a27" opacity="0.7"/>
+                        <ellipse cx="150" cy="150" rx="40" ry="50" fill="#2d5a27" opacity="0.7"/>
+                        
+                        <!-- 装饰点 -->
+                        <circle cx="230" cy="140" r="8" fill="#d4af37"/>
+                        <circle cx="180" cy="120" r="6" fill="#d4af37"/>
+                        <circle cx="260" cy="200" r="7" fill="#d4af37"/>
+                        <circle cx="130" cy="180" r="9" fill="#d4af37"/>
+                        <circle cx="200" cy="100" r="5" fill="#d4af37"/>
+                        
+                        <!-- 地面 -->
+                        <rect x="0" y="450" width="400" height="50" fill="#8db596" opacity="0.5"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于区域 -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>关于树小乐</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>你好！我是树小乐，一个在数字世界中不断探索和成长的人。正如我的名字和域名所表达的，我相信每个人都可以像一棵树一样，向下扎根汲取养分，向上生长追寻阳光。</p>
+                    <p>我的兴趣广泛，涵盖技术，写作，绘画等。我喜欢将复杂的概念分解成易于理解的部分，并与他人分享。</p>
+                    <p>这个网站将是我分享想法、记录学习和展示项目的空间。我希望它不仅能展示我的成长，也能为他人提供价值——就像树荫能为路人提供休憩一样。</p>
+                    <p>目前这个网站还处于初期阶段，就像一棵刚刚种下的树苗。但随着时间的推移，它会逐渐枝繁叶茂，内容也会越来越丰富。我计划在这里分享：</p>
+                    <ul style="margin-left: 2rem; margin-bottom: 1.5rem; color: var(--light-text);">
+                        <li>专业领域的深度文章和教程</li>
+                        <li>项目经验和案例分享</li>
+                        <li>读书笔记和学习心得</li>
+                        <li>生活思考和灵感记录</li>
+                    </ul>
+                    <p>感谢你来到这里，期待我们都能在这片数字森林中找到属于自己的成长路径。</p>
+                </div>
+                <div class="about-image">
+                    <!-- 占位头像，实际使用时可替换 -->
+                    <div class="avatar" style="background: linear-gradient(135deg, #2d5a27, #8db596); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <p style="margin-top: 1.5rem; font-style: italic; color: var(--primary-green);">数字园丁</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系区域 -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>保持联系</h2>
+            <p>如果你对我的内容感兴趣，想交流想法，或者有合作机会，欢迎通过以下方式联系我。我期待与志同道合的朋友建立连接！</p>
+            
+            <div class="contact-methods">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>电子邮件</h3>
+                    <p>欢迎发送邮件到：<br><a href="mailto:xiaoleya@foxmail.com">xiaoleya@foxmail.com</a></p>
+                    <p style="font-size: 0.9rem; margin-top: 1rem;">我会在7天内回复</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-rss"></i>
+                    </div>
+                    <h3>社交媒体</h3>
+                    <p>你可以在这些平台找到我：</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="https://qm.qq.com/q/GFwy0tfHiA" style="margin: 0 0.5rem; font-size: 1.5rem;"><i class="fab fa-qq"></i></a>
+                        <a href="https://github.com/SHxiaoleya" style="margin: 0 0.5rem; font-size: 1.5rem;"><i class="fab fa-github"></i></a>
+                        <a href="https://space.bilibili.com/106493680" style="margin: 0 0.5rem; font-size: 1.5rem;"><i class="fab fa-bilibili"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>奇怪的地方</h3>
+                    <p>找到密码，开启奇怪！</p>
+                    <div style="margin-top: 1rem;">
+                        <input type="password" placeholder="请输入密码" style="padding: 0.8rem; width: 100%; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 1rem;">
+                        <button style="background-color: var(--primary-green); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 5px; cursor: pointer; width: 100%;">进入！</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <i class="fas fa-tree"></i> 树.top
+            </div>
+            <p style="max-width: 600px; margin: 0 auto 1.5rem; opacity: 0.9;">在数字世界的土壤中扎根，在知识的阳光下生长，在分享的雨露中繁茂。</p>
+            
+            <ul class="footer-links">
+                <li><a href="/index.html">首页</a></li>
+                <li><a href="/txtwin/">文章</a></li>
+                <li><a href="/index.html#contact">联系</a></li>
+            </ul>
+            
+            <div class="copyright">
+                &copy; <span id="currentYear"></span> 树小乐 | 树.top 版权所有
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // 点击菜单项后关闭移动端菜单
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+        
+        // 设置当前年份
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 简单的表单提交处理
+        // 你找密码找到这儿来了？
+        document.querySelector('button').addEventListener('click', function() {
+            const emailInput = document.querySelector('input[type="password"]');
+            if(emailInput.value && emailInput.value.includes('tree')) {
+                alert('密码正确！现在试试在网址后面加上“/moko”!');
+                emailInput.value = '';
+            } else {
+                alert('密码错误喔！');
+            }
+        });
+    </script>
+</body>
+</html>
