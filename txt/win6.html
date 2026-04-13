@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 洛阳职业技术学院单招志愿录取数据分析</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        body {
+            background: #f4f7fc;
+            padding: 24px 20px;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 24px 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e9eef3;
+            transition: box-shadow 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 14px 28px rgba(0,0,0,0.06);
+        }
+        h2 {
+            font-weight: 600;
+            font-size: 1.7rem;
+            letter-spacing: -0.01em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 6px solid #2d6a9f;
+            padding-left: 18px;
+            color: #0b2b40;
+        }
+        h3 {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin: 16px 0 12px 0;
+            color: #1e4460;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .stat-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            margin-bottom: 8px;
+        }
+        .stat-badge {
+            background: #f0f6ff;
+            padding: 8px 18px;
+            border-radius: 48px;
+            font-weight: 500;
+            color: #1e4a7a;
+            border: 1px solid #d0e0f0;
+        }
+        .stat-badge strong {
+            font-weight: 700;
+            color: #0a3146;
+            margin-right: 6px;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 16px 0 8px;
+            border-radius: 18px;
+            border: 1px solid #dee7ef;
+            background: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            min-width: 580px;
+        }
+        th {
+            background: #eef3f9;
+            font-weight: 600;
+            padding: 14px 12px;
+            text-align: center;
+            color: #1e405e;
+            border-bottom: 2px solid #cbdae6;
+        }
+        td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid #e2eaf1;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .highlight-blue {
+            background-color: #e6f0fa;
+            font-weight: 500;
+        }
+        .profession-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 10px 18px;
+            margin-top: 8px;
+        }
+        .prof-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ccdae5;
+        }
+        .prof-name {
+            font-weight: 500;
+            color: #1e3a5f;
+        }
+        .prof-score {
+            font-weight: 700;
+            background: #eef3f9;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #0b3b5e;
+        }
+        .badge {
+            background: #1e4a7a;
+            color: white;
+            font-size: 0.8rem;
+            padding: 2px 10px;
+            border-radius: 30px;
+            margin-left: 10px;
+        }
+        .forecast-box {
+            background: linear-gradient(145deg, #f1f9ff 0%, #e3edf6 100%);
+            border-radius: 30px;
+            padding: 20px 26px;
+            border: 1px solid #bdd2e8;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .forecast-item {
+            text-align: center;
+            min-width: 120px;
+        }
+        .forecast-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #365e7e;
+        }
+        .forecast-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #103c5c;
+            line-height: 1.2;
+        }
+        .forecast-note {
+            font-size: 0.8rem;
+            color: #4e6f8a;
+            margin-top: 8px;
+        }
+        .footnote {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: #5e7180;
+            border-top: 1px solid #d8e2ec;
+            padding-top: 18px;
+        }
+        .inline-code {
+            background: #eef2f5;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-family: monospace;
+        }
+        hr {
+            border: none;
+            border-top: 2px dotted #b8cee2;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 标题 -->
+    <div style="margin-bottom: -8px;">
+        <h1 style="font-weight: 650; font-size: 2.1rem; color: #0f3147; letter-spacing: -0.02em;">📋 2025年洛阳职业技术学院 单招分数分析</h1>
+        <p style="color: #426680; margin-left: 8px;">数据来源于洛阳职业技术学院公开数据，已剔除中外合作办学专业，不做任何填报建议，仅供参考</p>
+    </div>
+
+    <!-- 1~5志愿 最高/最低/均值 总览卡片 -->
+    <div class="card">
+        <h2>📈 1~5志愿 核心统计 (剔除中外合作办学)</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>志愿顺序</th>
+                        <th>样本数 (专业数)</th>
+                        <th>最高分</th>
+                        <th>最低分</th>
+                        <th>平均分</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>第一志愿</strong></td>
+                        <td>41</td>
+                        <td>469</td>
+                        <td>392</td>
+                        <td>409.02</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第二志愿</strong></td>
+                        <td>19</td>
+                        <td>439</td>
+                        <td>392</td>
+                        <td>406.95</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第三志愿</strong></td>
+                        <td>12</td>
+                        <td>421</td>
+                        <td>392</td>
+                        <td>402.50</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第四志愿</strong></td>
+                        <td>10</td>
+                        <td>425</td>
+                        <td>394</td>
+                        <td>410.60</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第五志愿</strong></td>
+                        <td>4</td>
+                        <td>440</td>
+                        <td>396</td>
+                        <td>419.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px;">
+            <span class="stat-badge"><strong>📌 第一志愿均值</strong> 409.02</span>
+            <span class="stat-badge"><strong>🏆 最高分志愿</strong> 第五志愿 (440分，仅4专业)</span>
+            <span class="stat-badge"><strong>⚠️ 中外合作办学已剔除</strong> (机电一体化/大数据技术中外)</span>
+        </div>
+    </div>
+
+    <!-- 第一志愿：最高五个专业 + 最低五个专业 (并列情况一并展示) -->
+    <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+        <!-- 最高5个专业 -->
+        <div class="card" style="flex: 1 1 300px;">
+            <h3 style="margin-top: 0; border-left-color: #c44536;">🔺 第一志愿 · 分数最高5个专业</h3>
+            <div class="profession-list">
+                <div class="prof-item"><span class="prof-name">1. 体育保健与康复</span><span class="prof-score">469</span></div>
+                <div class="prof-item"><span class="prof-name">2. 宠物医疗技术</span><span class="prof-score">447</span></div>
+                <div class="prof-item"><span class="prof-name">3. 模具设计与制造</span><span class="prof-score">433</span></div>
+                <div class="prof-item"><span class="prof-name">4. 眼视光技术</span><span class="prof-score">431</span></div>
+                <div class="prof-item"><span class="prof-name">5. 工业机器人技术</span><span class="prof-score">429</span></div>
+            </div>
+            <div style="margin-top: 12px; background: #faf6e8; border-radius: 16px; padding: 8px 16px;">
+                <span style="font-weight:500;">✨ 最高分: 469 · 最低(前五门槛): 429</span>
+            </div>
+        </div>
+
+        <!-- 最低5个专业（含并列392/393） -->
+        <div class="card" style="flex: 1 1 300px;">
+            <h3 style="margin-top: 0; border-left-color: #2b7a4b;">🔻 第一志愿 · 分数最低专业 (并列展示)</h3>
+            <div class="profession-list">
+                <div class="prof-item"><span class="prof-name">1. 护理（康养方向）</span><span class="prof-score">392</span></div>
+                <div class="prof-item"><span class="prof-name">1. 大数据与财务管理</span><span class="prof-score">392</span></div>
+                <div class="prof-item"><span class="prof-name">1. 文化创意与策划</span><span class="prof-score">392</span></div>
+                <div class="prof-item"><span class="prof-name">4. 大数据与会计</span><span class="prof-score">393</span></div>
+                <div class="prof-item"><span class="prof-name">4. 烹饪工艺与营养</span><span class="prof-score">393</span></div>
+                <div class="prof-item"><span class="prof-name">4. 文物考古技术</span><span class="prof-score">393</span></div>
+            </div>
+            <div style="margin-top: 12px; background: #edf3e9; border-radius: 16px; padding: 8px 16px;">
+                <span style="font-weight:500;">📉 最低分为392 (3个专业)，其次393 (3个专业) ，均已列出。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第一志愿均值上下10个专业 (高于均值5个，低于均值5个) -->
+    <div class="card">
+        <h2>🎯 第一志愿均值附近专业 (均值=409.02)</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <!-- 高于均值最接近的5个 -->
+            <div style="flex: 1 1 260px;">
+                <h3 style="margin: 6px 0 14px 0; font-size: 1.2rem;">⬆️ 高于均值 · 最接近5个</h3>
+                <div style="background: #fafcff; border-radius: 18px; padding: 4px 0;">
+                    <div class="prof-item"><span class="prof-name">金融科技应用</span><span class="prof-score">412</span></div>
+                    <div class="prof-item"><span class="prof-name">电梯工程技术</span><span class="prof-score">413</span></div>
+                    <div class="prof-item"><span class="prof-name">软件技术(工业应用及互联方向)</span><span class="prof-score">413</span></div>
+                    <div class="prof-item"><span class="prof-name">石窟寺保护技术</span><span class="prof-score">413</span></div>
+                    <div class="prof-item"><span class="prof-name">城市轨道交通通信信号技术</span><span class="prof-score">414</span></div>
+                </div>
+                <div class="stat-badge" style="margin-top: 12px; background:#e4ebf5;">📊 高于均值范围: 412~414</div>
+            </div>
+            <!-- 低于均值最接近的5个 -->
+            <div style="flex: 1 1 260px;">
+                <h3 style="margin: 6px 0 14px 0; font-size: 1.2rem;">⬇️ 低于均值 · 最接近5个</h3>
+                <div style="background: #fafcff; border-radius: 18px; padding: 4px 0;">
+                    <div class="prof-item"><span class="prof-name">智慧健康养老服务与管理</span><span class="prof-score">406</span></div>
+                    <div class="prof-item"><span class="prof-name">建筑工程技术</span><span class="prof-score">406</span></div>
+                    <div class="prof-item"><span class="prof-name">供热通风与空调工程技术</span><span class="prof-score">406</span></div>
+                    <div class="prof-item"><span class="prof-name">大数据与审计</span><span class="prof-score">406</span></div>
+                    <div class="prof-item"><span class="prof-name">新能源装备技术</span><span class="prof-score">404</span></div>
+                </div>
+                <div class="stat-badge" style="margin-top: 12px; background:#e4ebf5;">📊 低于均值范围: 404~406</div>
+            </div>
+        </div>
+        <hr>
+        <div style="display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap;">
+            <span><strong>📐 第一志愿均值:</strong> 409.02</span>
+            <span class="inline-code">高于均值共 21 个专业</span>
+            <span class="inline-code">低于均值共 20 个专业</span>
+        </div>
+    </div>
+
+    <!-- 预测今年 (满分400) 第一志愿数据 -->
+    <div class="card" style="background: linear-gradient(135deg, #f3f9fc 0%, #ffffff 80%);">
+        <h2>🔮 2026年预测 · 第一志愿 (满分400分制)</h2>
+        <p style="margin-bottom: 18px; color: #1e4b66;">基于往年满分600 → 今年满分400 线性换算（仅按比例，未考虑难度/人数变化）</p>
+        
+        <div class="forecast-box">
+            <div class="forecast-item">
+                <div class="forecast-label">预测最高分</div>
+                <div class="forecast-number">313</div>
+                <div class="forecast-note">469 × (400/600) ≈ 312.67</div>
+            </div>
+            <div class="forecast-item">
+                <div class="forecast-label">预测最低分</div>
+                <div class="forecast-number">261</div>
+                <div class="forecast-note">392 × (400/600) ≈ 261.33</div>
+            </div>
+            <div class="forecast-item">
+                <div class="forecast-label">预测平均分</div>
+                <div class="forecast-number">273</div>
+                <div class="forecast-note">409.02 × (400/600) ≈ 272.68</div>
+            </div>
+        </div>
+
+        <!-- 预测分数段简表 -->
+        <div style="margin-top: 24px;">
+            <h3 style="margin-bottom: 6px;">📊 预测分数段分布 (按比例映射)</h3>
+            <div class="table-wrapper" style="margin-top: 8px;">
+                <table style="min-width: 450px;">
+                    <thead>
+                        <tr><th>往年分数段(600分制)</th><th>专业数</th><th>预测今年(400分制)</th><th>预测专业数</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>350–399</td><td>18</td><td>233–266</td><td>18</td></tr>
+                        <tr><td>400–449</td><td>22</td><td>267–299</td><td>22</td></tr>
+                        <tr><td>450–469</td><td>1</td><td>300–313</td><td>1</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="footnote">
+            ⚠️ 注：预测仅采用满分比例换算 (分数 × 2/3)，未加入难度系数或考生分布修正。实际分数线以官方发布为准。
+        </div>
+    </div>
+
+    <!-- 底部数据摘要 -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: 8px; color: #3b6888; padding: 0 6px;">
+        <div>📅 数据来源：洛阳职业技术学院-招生信息网</div>
+    </div>
+    <div style="height: 8px;"></div>
+</div>
+
+<!-- 悬浮返回按钮 - 树小乐风格 -->
+<style>
+  /* 确保按钮样式独立，不污染页面其他元素 */
+  .tree-home-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #578e4e;
+    color: #f9fff5;
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: 60px;
+    text-decoration: none;
+    box-shadow: 0 6px 14px rgba(30, 60, 20, 0.3);
+    transition: all 0.2s ease;
+    border: 1px solid #b1dba3;
+    backdrop-filter: blur(2px);
+  }
+  .tree-home-btn i {
+    font-size: 1.2rem;
+  }
+  .tree-home-btn:hover {
+    transform: translateY(-3px);
+    background: #6b9c60;
+    box-shadow: 0 10px 18px rgba(30, 60, 20, 0.4);
+  }
+  /* 移动端调整大小 */
+  @media (max-width: 550px) {
+    .tree-home-btn {
+      padding: 6px 14px;
+      font-size: 1rem;
+      bottom: 16px;
+      right: 16px;
+    }
+  }
+</style>
+
+<!-- 如果页面没有加载 Font Awesome，需要引入图标库（可选） -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<a href="/" class="tree-home-btn" title="返回树小乐主页">
+  <i class="fas fa-tree"></i> 树.top
+  <i class="fas fa-arrow-right"></i>
+</a>
+
+</body>
+</html>
