@@ -191,5 +191,58 @@
 <footer>
     📊 基于河南职业技术学院2025年单独招生考试《职业适应性A卷》《职业技能A卷》原题整理 · 题目来源于河南职业技术学院招生信息网
 </footer>
+
+<!-- 悬浮返回按钮 - 树小乐风格 -->
+<style>
+  /* 确保按钮样式独立，不污染页面其他元素 */
+  .tree-home-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #578e4e;
+    color: #f9fff5;
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: 60px;
+    text-decoration: none;
+    box-shadow: 0 6px 14px rgba(30, 60, 20, 0.3);
+    transition: all 0.2s ease;
+    border: 1px solid #b1dba3;
+    backdrop-filter: blur(2px);
+  }
+  .tree-home-btn i {
+    font-size: 1.2rem;
+  }
+  .tree-home-btn:hover {
+    transform: translateY(-3px);
+    background: #6b9c60;
+    box-shadow: 0 10px 18px rgba(30, 60, 20, 0.4);
+  }
+  /* 移动端调整大小 */
+  @media (max-width: 550px) {
+    .tree-home-btn {
+      padding: 6px 14px;
+      font-size: 1rem;
+      bottom: 16px;
+      right: 16px;
+    }
+  }
+</style>
+
+<!-- 如果页面没有加载 Font Awesome，需要引入图标库（可选） -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<a href="/" class="tree-home-btn" title="返回树小乐主页">
+  <i class="fas fa-tree"></i> 树.top
+  <i class="fas fa-arrow-right"></i>
+</a>
+
 </body>
 </html>
