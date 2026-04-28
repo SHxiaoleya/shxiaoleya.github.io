@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>moko | 会打瞌睡的小蘑菇</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f8f7ff;
+      --card: rgba(255, 255, 255, 0.72);
+      --blue: #b9c9ee;
+      --blue-dark: #8295c9;
+      --purple: #c8bde8;
+      --pink: #f3b9c6;
+      --text: #7d7f9f;
+      --soft-text: #a8a9c5;
+      --white: #ffffff;
+      --shadow: 0 18px 45px rgba(164, 174, 218, 0.28);
+      --border: rgba(185, 201, 238, 0.55);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family:
+        "Nunito",
+        "Comic Sans MS",
+        "Microsoft YaHei",
+        "PingFang SC",
+        sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(218, 225, 255, 0.9), transparent 28%),
+        radial-gradient(circle at 90% 12%, rgba(255, 224, 235, 0.8), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(218, 238, 255, 0.9), transparent 35%),
+        linear-gradient(135deg, #fffafd, #f5f7ff 45%, #fff);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: rgba(197, 210, 245, 0.25);
+      filter: blur(10px);
+      z-index: -1;
+    }
+
+    body::before {
+      left: -110px;
+      top: 80px;
+    }
+
+    body::after {
+      right: -120px;
+      bottom: 40px;
+      background: rgba(246, 196, 212, 0.22);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 70px;
+    }
+
+    /* 顶部导航 */
+    .nav {
+      position: sticky;
+      top: 16px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 22px;
+      margin-bottom: 34px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 10px 30px rgba(185, 201, 238, 0.22);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 28px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: var(--blue-dark);
+    }
+
+    .logo span {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff0f5;
+      border: 1px solid rgba(243, 185, 198, 0.7);
+      font-size: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--soft-text);
+    }
+
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: 999px;
+      transition: 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue-dark);
+      background: rgba(236, 241, 255, 0.9);
+    }
+
+    /* 通用卡片 */
+    .glass {
+      border: 1px solid var(--border);
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--blue-dark);
+      font-size: 24px;
+      letter-spacing: 1px;
+    }
+
+    .section-title::before {
+      content: "✦";
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      box-shadow: 0 8px 18px rgba(185, 201, 238, 0.45);
+      font-size: 15px;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 34px;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px dashed rgba(168, 169, 197, 0.45);
+      border-radius: 28px;
+      pointer-events: none;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 15px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: rgba(255, 240, 245, 0.75);
+      border: 1px solid rgba(243, 185, 198, 0.45);
+      color: #c8879a;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: 1;
+      color: #a5a7d6;
+      letter-spacing: 3px;
+      margin-bottom: 14px;
+      font-weight: 800;
+      text-shadow: 0 8px 20px rgba(185, 201, 238, 0.35);
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: var(--soft-text);
+      margin-bottom: 24px;
+    }
+
+    .desc {
+      line-height: 2;
+      font-size: 15px;
+      color: #8e90ad;
+      max-width: 520px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 130px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      transition: 0.25s;
+    }
+
+    .btn.primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      box-shadow: 0 10px 22px rgba(185, 201, 238, 0.45);
+    }
+
+    .btn.secondary {
+      background: rgba(255, 255, 255, 0.68);
+      color: var(--blue-dark);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero-image {
+      position: relative;
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .hero-image::before {
+      content: "moko";
+      position: absolute;
+      left: 38px;
+      top: 28px;
+      font-size: 54px;
+      color: rgba(165, 167, 214, 0.28);
+      font-weight: 800;
+      letter-spacing: 3px;
+      z-index: 1;
+    }
+
+    .hero-image img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 28px;
+      filter: saturate(0.95) brightness(1.03);
+    }
+
+    .floating {
+      position: absolute;
+      z-index: 3;
+      right: 32px;
+      bottom: 32px;
+      padding: 12px 16px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(185, 201, 238, 0.65);
+      color: #a2a4ca;
+      font-size: 14px;
+      box-shadow: 0 14px 28px rgba(185, 201, 238, 0.25);
+    }
+
+    /* 基本资料 */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.05fr;
+      gap: 22px;
+      margin-bottom: 36px;
+    }
+
+    .info-card {
+      padding: 26px;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(246, 248, 255, 0.72);
+      border: 1px solid rgba(185, 201, 238, 0.35);
+      font-size: 14px;
+    }
+
+    .info-item b {
+      color: var(--blue-dark);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .note {
+      line-height: 2;
+      font-size: 15px;
+      color: #8f91ae;
+    }
+
+    .fullbody-card {
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .fullbody-card img {
+      width: 100%;
+      height: 100%;
+      max-height: 620px;
+      object-fit: contain;
+      border-radius: 24px;
+    }
+
+    /* 喜好标签 */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(255, 245, 249, 0.9);
+      border: 1px solid rgba(243, 185, 198, 0.45);
+      color: #b98196;
+      font-size: 13px;
+    }
+
+    /* 图片展示 */
+    .gallery {
+      margin-bottom: 36px;
+      padding: 28px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+    }
+
+    .gallery-main img,
+    .gallery-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 26px;
+      border: 1px solid rgba(185, 201, 238, 0.45);
+    }
+
+    .gallery-main {
+      min-height: 420px;
+    }
+
+    .gallery-side {
+      display: grid;
+      gap: 20px;
+    }
+
+    .gallery-side img {
+      min-height: 200px;
+    }
+
+    /* 表情 */
+    .expression {
+      padding: 28px;
+      margin-bottom: 36px;
+    }
+
+    .expression-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .expression-img img {
+      border-radius: 28px;
+      border: 1px solid rgba(185, 201, 238, 0.55);
+    }
+
+    .mood-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .mood {
+      padding: 16px 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.64);
+      border: 1px solid rgba(185, 201, 238, 0.45);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .mood span {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #f2f5ff;
+      font-size: 18px;
+    }
+
+    .mood div {
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .mood strong {
+      display: block;
+      color: var(--blue-dark);
+      font-size: 15px;
+    }
+
+    /* 小故事 */
+    .story {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .story-card {
+      padding: 30px;
+    }
+
+    .quote {
+      position: relative;
+      padding: 24px;
+      border-radius: 26px;
+      background: rgba(255, 250, 252, 0.82);
+      border: 1px dashed rgba(243, 185, 198, 0.65);
+      line-height: 2;
+      color: #9294b2;
+      font-size: 15px;
+    }
+
+    .quote::before {
+      content: "“";
+      position: absolute;
+      left: 18px;
+      top: -12px;
+      font-size: 60px;
+      color: rgba(243, 185, 198, 0.45);
+      font-family: serif;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .time-item {
+      position: relative;
+      padding: 18px 18px 18px 48px;
+      border-radius: 22px;
+      background: rgba(246, 248, 255, 0.75);
+      border: 1px solid rgba(185, 201, 238, 0.42);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .time-item::before {
+      content: "🍄";
+      position: absolute;
+      left: 16px;
+      top: 18px;
+    }
+
+    .time-item strong {
+      display: block;
+      color: var(--blue-dark);
+      margin-bottom: 4px;
+    }
+
+    /* 页脚 */
+    .footer {
+      padding: 24px;
+      text-align: center;
+      color: #a9abc9;
+      font-size: 14px;
+    }
+
+    .footer .hearts {
+      margin-bottom: 8px;
+      color: #e8a8ba;
+      letter-spacing: 8px;
+    }
+
+    /* 装饰 */
+    .decor {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.72;
+      animation: float 4.8s ease-in-out infinite;
+    }
+
+    .decor.one {
+      right: 10%;
+      top: 130px;
+      font-size: 34px;
+    }
+
+    .decor.two {
+      left: 5%;
+      top: 560px;
+      font-size: 28px;
+      animation-delay: 1s;
+    }
+
+    .decor.three {
+      right: 5%;
+      top: 850px;
+      font-size: 30px;
+      animation-delay: 1.8s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-14px) rotate(5deg);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        align-items: flex-start;
+        border-radius: 28px;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+      }
+
+      .hero,
+      .profile-grid,
+      .gallery-grid,
+      .expression-wrap,
+      .story {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-main {
+        min-height: auto;
+      }
+
+      .hero-card {
+        padding: 28px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 12px;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      .hero h1 {
+        font-size: 54px;
+      }
+
+      .subtitle {
+        font-size: 17px;
+      }
+
+      .hero-card,
+      .gallery,
+      .expression,
+      .story-card,
+      .info-card {
+        padding: 22px;
+        border-radius: 26px;
+      }
+
+      .hero-image,
+      .fullbody-card {
+        padding: 14px;
+      }
+
+      .nav-links a {
+        padding: 7px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="decor one">☁️</div>
+  <div class="decor two">🍄</div>
+  <div class="decor three">🎀</div>
+
+  <main class="page">
+    <nav class="nav">
+      <a href="#" class="logo">
+        <span>🍄</span>
+        moko
+      </a>
+
+      <div class="nav-links">
+        <a href="#about">关于</a>
+        <a href="#gallery">图集</a>
+        <a href="#mood">表情</a>
+        <a href="#story">小故事</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-card glass">
+        <div class="tag">🌙 会打瞌睡的小蘑菇</div>
+        <h1>moko</h1>
+        <p class="subtitle">柔软、安静、带着淡淡蘑菇香气的小小女孩</p>
+
+        <p class="desc">
+          moko 是一只总是有点困困的小蘑菇。她喜欢抱着软乎乎的小枕头，
+          在云朵和细雨声里慢慢睡着。偶尔会因为害羞而脸红，
+          也会因为发现可爱的蝴蝶结和小蘑菇发夹而悄悄开心。
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#about">了解 moko</a>
+          <a class="btn secondary" href="#gallery">查看图集</a>
+        </div>
+      </div>
+
+      <div class="hero-image glass">
+        <img src="moko-portrait.jpg" alt="moko 头像" />
+        <div class="floating">今天也想睡一小会儿 zzz...</div>
+      </div>
+    </section>
+
+    <section id="about" class="profile-grid">
+      <div class="info-card glass">
+        <h2 class="section-title">基本资料</h2>
+
+        <div class="info-list">
+          <div class="info-item">
+            <b>姓名</b>
+            <span>moko</span>
+          </div>
+          <div class="info-item">
+            <b>身份</b>
+            <span>小蘑菇精灵</span>
+          </div>
+          <div class="info-item">
+            <b>身高</b>
+            <span>139cm</span>
+          </div>
+          <div class="info-item">
+            <b>生日</b>
+            <span>12月11日</span>
+          </div>
+          <div class="info-item">
+            <b>星座</b>
+            <span>射手座</span>
+          </div>
+          <div class="info-item">
+            <b>性格</b>
+            <span>软糯、怕生、爱犯困</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card glass">
+        <h2 class="section-title">喜欢的事物</h2>
+
+        <p class="note">
+          moko 喜欢安静的角落、轻轻落下的雨声、柔软的小枕头，
+          以及带着甜甜香气的蘑菇点心。她也很喜欢收集蝴蝶结、
+          小瓶子和写满秘密的日记本。
+        </p>
+
+        <div class="chips">
+          <span class="chip">小枕头</span>
+          <span class="chip">蘑菇发卡</span>
+          <span class="chip">蓝色蝴蝶结</span>
+          <span class="chip">云朵</span>
+          <span class="chip">雨天</span>
+          <span class="chip">玻璃小瓶</span>
+          <span class="chip">软软玩偶</span>
+          <span class="chip">午睡</span>
+        </div>
+      </div>
+
+      <div class="fullbody-card glass">
+        <img src="moko-fullbody.jpg" alt="moko 全身立绘" />
+      </div>
+    </section>
+
+    <section id="gallery" class="gallery glass">
+      <h2 class="section-title">moko 图集</h2>
+
+      <div class="gallery-grid">
+        <div class="gallery-main">
+          <img src="moko-profile.jpg" alt="moko 设定图" />
+        </div>
+
+        <div class="gallery-side">
+          <img src="moko-sleep.jpg" alt="moko 睡觉" />
+          <img src="moko-book.jpg" alt="moko 读书" />
+        </div>
+      </div>
+    </section>
+
+    <section id="mood" class="expression glass">
+      <h2 class="section-title">表情参考</h2>
+
+      <div class="expression-wrap">
+        <div class="expression-img">
+          <img src="moko-expression.jpg" alt="moko 表情九宫格" />
+        </div>
+
+        <div class="mood-list">
+          <div class="mood">
+            <span>😪</span>
+            <div>
+              <strong>刚睡醒</strong>
+              眼睛还没有完全睁开，怀里抱着小枕头，声音也软软的。
+            </div>
+          </div>
+
+          <div class="mood">
+            <span>❔</span>
+            <div>
+              <strong>思考中</strong>
+              遇到不懂的问题时，会轻轻歪头，认真又迷糊。
+            </div>
+          </div>
+
+          <div class="mood">
+            <span>💗</span>
+            <div>
+              <strong>开心</strong>
+              收到喜欢的小蘑菇饰品时，会偷偷比出胜利手势。
+            </div>
+          </div>
+
+          <div class="mood">
+            <span>🥺</span>
+            <div>
+              <strong>委屈</strong>
+              如果小枕头不见了，眼眶会马上变得湿漉漉。
+            </div>
+          </div>
+
+          <div class="mood">
+            <span>😴</span>
+            <div>
+              <strong>打瞌睡</strong>
+              最常见的状态。只要听见雨声，就会慢慢睡着。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="story" class="story">
+      <div class="story-card glass">
+        <h2 class="section-title">小故事</h2>
+
+        <div class="quote">
+          moko 总是睡不够。无论在哪里见到她，
+          不小心打起瞌睡的几率都很高。
+          她喜欢躲在柔软的角落里，
+          抱着小枕头发呆。她说，云朵和蘑菇会告诉她很多好多秘密。
+        </div>
+      </div>
+
+      <div class="story-card glass">
+        <h2 class="section-title">日常记录</h2>
+
+        <div class="timeline">
+          <div class="time-item">
+            <strong>清晨</strong>
+            被一颗小蘑菇轻轻叫醒，揉揉眼睛，开始慢吞吞地整理蝴蝶结。
+          </div>
+
+          <div class="time-item">
+            <strong>午后</strong>
+            坐在云朵边缘晒太阳，抱着小枕头睡了一个甜甜的午觉。
+          </div>
+
+          <div class="time-item">
+            <strong>雨天</strong>
+            最喜欢听窗外淅淅沥沥的声音，觉得整个世界都变得很柔软。
+          </div>
+
+          <div class="time-item">
+            <strong>夜晚</strong>
+            把今天遇见的小小快乐写进日记本，然后和玩偶一起进入梦乡。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer glass">
+      <div class="hearts">♡ ♡ ♡</div>
+      <p>moko profile website · soft mushroom dream</p>
+    </footer>
+  </main>
+</body>
+</html>
